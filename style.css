@@ -13,37 +13,31 @@ body {
     font-family:'Poppins', sans-serif;
 }
 
+header{
+    background-color: #2D4A22;
+    padding: 2rem 0 10rem;
+    text-align: center;
+}
+
 .container{
     width: min(90vw, 800px);
     margin: auto;
 }
 
-h2{
-    margin-top: 3.2rem;
-    margin-bottom: 0.8rem;
-    color: #363f5f;
-
-    font-weight: normal;
-}
-
-header{
-    background-color: #2D4A22;
-    padding: 2rem 0 10rem;
-    text-align: center;
-
-}
-
-#logo{
-    
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 #balance{
     margin-top: -8rem;
-}
-
-#balance h2 {
-    color:white;
-    margin-top:0;
 }
 
 .card{
@@ -58,6 +52,10 @@ header{
 .card h3{
     font-size: 1rem;
     font-weight: 400;
+
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
 }
 
 .card p{
@@ -71,6 +69,27 @@ header{
     color: #ffffff;
 }
 
+
+a{
+    color: #3dd705;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #49AA26;
+}
+
+.button.new{
+    display: inline-block;
+    margin-bottom: .8rem;
+}
+
+#transactions{
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+}
+
 #data-table{
     width: 100%;
 
@@ -78,8 +97,16 @@ header{
     color: #969cb3;
 }
 
+tr th:first-child, tr td:first-child{
+    border-radius: .25rem 0 0 .25rem;
+}
+
+tr td:last-child, tr th:last-child{
+    border-radius: 0 .25rem .25rem 0;
+}
+
 table th{
-    background: white;
+    background-color: white;
     font-weight: 400;
     padding: 1rem 2rem;
     text-align: left;
@@ -94,7 +121,7 @@ table tbody tr:hover{
 }
 
 table td{
-    background: white;
+    background-color: white;
     padding: 1rem 2rem;
 }
 
@@ -115,4 +142,16 @@ footer{
     padding: 4rem 0 2rem;
     color: #363f5f;
     opacity: 0.6;
+}
+
+@media (min-width: 800px){
+    html{
+        font-size: 87.5%;
+    }
+
+    #balance{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
 }
