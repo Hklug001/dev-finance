@@ -25,27 +25,27 @@
                     <span>Entradas</span>
                     <img src="assets/income.svg" alt="income icon">
                 </h3>
-                <p>R$5000.00</p>
+                <p id="incomeDisplay"></p>
             </div>
             <div class="card">
                 <h3>
                     <span>Saídas</span>
                     <img src="assets/expense.svg" alt="expense icon">
                 </h3>
-                <p>R$2000.00</p>
+                <p id="expenseDisplay"></p>
             </div>
             <div class="card total">
                 <h3>
                     <span>Total</span>
                     <img src="assets/total.svg" alt="total icon">
                 </h3>
-                <p>R$3000.00</p>
+                <p id="totalDisplay"></p>
             </div>
         </section>
 
         <section id="transactions">
             <h2 class="sr-only">Transações</h2>
-            <a href="#" class="button new" onclick="Modal.open()">+ Nova Transação</a>
+            <a href="#" class="button new" onclick="Form.toggleModal()">+ Nova Transação</a>
             <table id="data-table">
                 <thead>
                     <tr>
@@ -56,24 +56,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="description">luz</td>
-                        <td class="expense">- R$500.00</td>
-                        <td class="date">23/01/2022</td>
-                        <td><img src="assets/minus.svg" alt="minus icon"></td>
-                    </tr>
-                    <tr>
-                        <td class="description">Criação Website</td>
-                        <td class="income">+ R$5000.00</td>
-                        <td class="date">23/01/2022</td>
-                        <td><img src="assets/plus.svg" alt="plus icon"></td>
-                    </tr>
-                    <tr>
-                        <td class="description">Internet</td>
-                        <td class="expense">- R$200.00</td>
-                        <td class="date">23/01/2022</td>
-                        <td><img src="assets/minus.svg" alt="minus icon"></td>
-                    </tr>
                 </tbody>
             </table>
         </section>
@@ -82,23 +64,23 @@
     <div class="modal-overlay">
         <div class="modal">
             <h2>Nova Transação</h2>
-            <form action="">
+            <form action="" onsubmit="Form.submitForm(event)">
                 <div class="input-group">
                     <label for="description" class="sr-only">Descriçaõ</label>
-                    <input type="text" id="description" name="description" placeholder="Descrição">
+                    <input type="text" id="description" name="description" placeholder="Descrição" required>
                 </div>
                 <div class="input-group">
                     <label for="amount" class="sr-only">Descriçaõ</label>
-                    <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01">
+                    <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" required>
                     <small class="help">Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais</small>
                 </div>
                 <div class="input-group">
                     <label for="date"></label>
-                    <input type="date" id="date" name="date">
+                    <input type="date" id="date" name="date" required>
                 </div>
                 <div class="input-group actions">
-                    <a href="#" class="button cancel" onclick="Modal.close()">Cancelar</a>
-                    <button type="submit" onclick="newTransaction()">Salvar</button>
+                    <a href="#" class="button cancel" onclick="Form.toggleModal()">Cancelar</a>
+                    <button type="submit">Salvar</button>
                 </div>
             </form>
         </div>
