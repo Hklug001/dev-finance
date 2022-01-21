@@ -1,39 +1,29 @@
+const Storage = {
+    get() {
+        return JSON.parse(localStorage.getItem('finances:transaction')) || [];
+    },
+
+    set(transactions) {
+        localStorage.setItem('finances:transaction', JSON.stringify(transactions));
+    },
+}
+
 const Transactions = {
-    all: transaction = [
-        {
-            description: 'luz',
-            expense: -50001,
-            date: '23/01/2022'
-        },
-        {
-            description: 'Website',
-            expense: 500038,
-            date: '23/01/2022'
-        },
-        {
-            description: 'Internet',
-            expense: -20045,
-            date: '23/01/2022'
-        },
-        {
-            description: 'App',
-            expense: 200076,
-            date: '23/01/2022'
-        },
-    ],
-    addTransaction(index) {
+    all: transaction = Storage.get(),
+
+    createTransactions(index) {
         const tr = document.createElement('tr');
         tr.innerHTML =
             `
             <td class="description">${Transactions.all[index].description}</td>
-            <td class="${Transactions.all[index].expense > 0 ? 'income' : 'expense'}">${Util.formatCurrency(Transactions.all[index].expense)}</td>
+            <td class="${Transactions.all[index].amount > 0 ? 'income' : 'expense'}">${Util.formatCurrency(Transactions.all[index].amount)}</td>
             <td class="date">${Transactions.all[index].date}</td>
-            <td><img src="assets/minus.svg" alt="minus icon"></td>
+            <td><img src="assets/minus.svg" alt="minus icon" onclick="Transactions.removeTransaction(${index})" title="remove"></td>
             `
         document.querySelector('tbody').appendChild(tr);
     },
 
-    createTransaction(transaction) {
+    addTransaction(transaction) {
         Transactions.all.push(transaction);
 
         App.reload();
@@ -53,52 +43,69 @@ const Transactions = {
 const Balance = {
     updateBalance() {
         document.querySelector('#incomeDisplay').innerHTML = Util.formatCurrency(Balance.getIncome());
-        document.querySelector('#expenseDisplay').innerHTML = Util.formatCurrency(Balance.getExpenses());
+        document.querySelector('#amountDisplay').innerHTML = Util.formatCurrency(Balance.getAmount());
         document.querySelector('#totalDisplay').innerHTML = Util.formatCurrency(Balance.getTotal());
     },
 
     getIncome() {
         let income = 0;
         Transactions.all.forEach(tran => {
-            if (tran.expense > 0) {
-                income += tran.expense;
+            if (tran.amount > 0) {
+                income += tran.amount;
             }
         })
-        return (income);
+        return income;
     },
 
-    getExpenses() {
-        let expense = 0;
+    getAmount() {
+        let amount = 0;
         Transactions.all.forEach(tran => {
-            if (tran.expense < 0) {
-                expense += tran.expense;
+            if (tran.amount < 0) {
+                amount += tran.amount;
             }
         })
-        return (expense);
+        return amount;
     },
 
     getTotal() {
-        let total = Balance.getIncome() + Balance.getExpenses()
-        return (total);
+        let total = Balance.getIncome() + Balance.getAmount()
+        return total;
     },
 }
 
 const Form = {
+
+    description: document.querySelector('#description'),
+    amount: document.querySelector('#amount'),
+    date: document.querySelector('#date'),
+
     toggleModal() {
         document.querySelector('.modal-overlay').classList.toggle('active');
     },
 
     getValues() {
         return {
-            description: document.querySelector('#description').value,
-            amount: document.querySelector('#amount').value,
-            date: document.querySelector('#date').value,
+            description: Form.description.value,
+            amount: Util.formatAmount(Form.amount.value),
+            date: Util.formatDate(Form.date.value),
         }
+    },
+
+    clearForm() {
+        Form.description.value = '';
+        Form.amount.value = '';
+        Form.date.value = '';
     },
 
     submitForm(event) {
         event.preventDefault();
 
+        const newTransaction = Form.getValues();
+        Transactions.addTransaction(newTransaction);
+
+        Form.clearForm();
+        Form.toggleModal();
+        App.reload();
     }
 }
 
@@ -116,14 +123,25 @@ const Util = {
         return signal + value;
 
     },
+
+    formatAmount(amount) {
+        amount = Number(amount) * 100;
+        return amount;
+    },
+
+    formatDate(date) {
+        date = date.split('-').reverse();
+        return String(date).replace(/\,/g, '/');
+    }
 }
 
 const App = {
     init() {
         Transactions.all.forEach(transactionObj => {
-            Transactions.addTransaction(transaction.indexOf(transactionObj))
+            Transactions.createTransactions(transaction.indexOf(transactionObj))
         });
         Balance.updateBalance();
+        Storage.set(Transactions.all);
     },
     reload() {
         Transactions.clearTransactions();
@@ -131,4 +149,4 @@ const App = {
     },
 }
 
-App.init();
+App.init(); 
