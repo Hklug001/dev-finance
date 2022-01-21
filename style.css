@@ -41,6 +41,8 @@ header{
 }
 
 .card{
+    
+
     background-color: #FFFFFF;
     padding: 1.5rem 2rem;
     border-radius: 0.3125rem;
@@ -260,8 +262,15 @@ footer{
     }
 
     #balance{
+        width:100%;
+
         display: flex;
         justify-content: space-evenly;
+        gap: 2rem;
+    }
+
+    .card{
+        width: 18rem;
     }
 
 }

@@ -111,7 +111,7 @@ const Form = {
 
 const Util = {
     formatCurrency(value) {
-        const signal = Number(value) > 0 ? '' : '-';
+        const signal = Number(value) >= 0 ? '' : '-';
 
         value = String(value).replace(/\D/g, '');
         value = Number(value) / 100;
@@ -125,8 +125,8 @@ const Util = {
     },
 
     formatAmount(amount) {
-        amount = Number(amount) * 100;
-        return amount;
+        amount = amount * 100;
+        return Math.round(amount);
     },
 
     formatDate(date) {
