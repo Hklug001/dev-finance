@@ -268,9 +268,4 @@ footer{
         justify-content: space-evenly;
         gap: 2rem;
     }
-
-    .card{
-        width: 18rem;
-    }
-
 }
