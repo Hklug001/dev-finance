@@ -18,8 +18,8 @@ const Transactions = {
             <td class="description">${Transactions.all[index].description}</td>
             <td class="${Transactions.all[index].amount > 0 ? 'income' : 'expense'}">${Util.formatCurrency(Transactions.all[index].amount)}</td>
             <td class="date">${Transactions.all[index].date}</td>
-            <td><img src="assets/plus.svg" alt="plus icon" onclick="Transactions.updateTransaction(${index})" title="update"></td>
-            <td><img src="assets/minus.svg" alt="minus icon" onclick="Transactions.removeTransaction(${index})" title="remove"></td>
+            <td class="icon"><img src="assets/plus.svg" alt="plus icon" onclick="Transactions.updateTransaction(${index})" title="update"></td>
+            <td class="icon"><img src="assets/minus.svg" alt="minus icon" onclick="Transactions.removeTransaction(${index})" title="remove"></td>
             `
         document.querySelector('tbody').appendChild(tr);
     },

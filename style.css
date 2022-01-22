@@ -112,6 +112,10 @@ table th{
     text-align: left;
 }
 
+.text-icon{
+    text-align: center;
+}
+
 table tbody tr{
     opacity: 0.7;
 }
@@ -123,6 +127,7 @@ table tbody tr:hover{
 table td{
     background-color: white;
     padding: 1rem 2rem;
+    text-align: left;
 }
 
 td.description{
@@ -135,6 +140,11 @@ td.income{
 
 td.expense{
     color: #e92929;
+}
+
+td.icon{
+    text-align: center;
+    cursor: pointer;
 }
 
 .modal-overlay{
