@@ -161,6 +161,11 @@ td.expense{
     visibility: visible;
 }
 
+.modal-overlay.update.active{
+    opacity: 1;
+    visibility: visible;
+}
+
 .modal{
     background: #f0f2f5;
     padding: 2.4rem;
