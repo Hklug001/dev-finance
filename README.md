@@ -1,1 +1,2 @@
-Access the page <a href='https://hklug001.github.io/dev-finance/'>here</a>
+# Dev Finance$
+Take care of your finances without the need of worksheets
